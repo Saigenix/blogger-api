@@ -1,0 +1,4 @@
+credentials.storage
+.env
+cs.json
+__pycache__
