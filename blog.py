@@ -2,35 +2,24 @@ from main import getBloggerService
 from ai import get_content
 from random import randint
 from image import generate_image
+from helper import get_titles
 import os
+
+# topic
+TOPIC = "computer Science"
+
 
 # making blogger service
 service = getBloggerService()
 
-title = "Quantum Computing Explained"
-customMetaData = f"this article related to {title}"
-labels = ["Computer-Science", "Education"]
-img = "https://i.pinimg.com/originals/cd/bc/f0/cdbcf077b62246123f74fcc919587b0b.jpg"
 
 
-def buildHtml():
+# img = "https://i.pinimg.com/originals/cd/bc/f0/cdbcf077b62246123f74fcc919587b0b.jpg"
+
+
+def buildHtml(title):
     html = get_content(title)
     return html
-
-
-payload = {
-    "content": buildHtml(),
-    "title": title,
-    "labels": labels,
-    "customMetaData": customMetaData,
-    #         "images": [ # Display image for the Post.
-    #     {
-    #       "url": img,
-    #     },
-    #   ],
-    # "status":"pending",
-}
-
 
 def postToBlogger(payload):
     print("is it ok? y and n")
@@ -46,4 +35,26 @@ def postToBlogger(payload):
         print("not posted")
 
 
-postToBlogger(payload)
+#driver code
+title_list = get_titles(TOPIC)
+# title_list = ["Complete Guide About Generative AI"]
+for title in title_list:
+    print(f"do you want this y,n {title}?")
+    ans = input()
+    if ans == "y":
+        print(f"generating blog for... {title}")
+        payload = {
+        "content": buildHtml(title),
+        "title": title,
+        "labels": [TOPIC, "Education"],
+        "customMetaData": f"this article related to {title}",
+        #         "images": [ # Display image for the Post.
+        #     {
+        #       "url": img,
+        #     },
+        #   ],
+        # "status":"pending",
+        }
+        postToBlogger(payload)
+    else:
+        continue

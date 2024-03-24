@@ -21,8 +21,8 @@ def generate_image(title):
         d1.multiline_text((new_width, new_height+y), line, font=myFont,fill=(256, 256, 256))
         y = y + 65
     im.show()
-    im.save(f"raw/new.png")
-    # im.save(f"raw/{title}.png")
+    # im.save(f"raw/new.png")
+    im.save(f"raw/images/{title}.png")
 
 
 # generate_image("why you should learn Typescript?")

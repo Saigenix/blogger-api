@@ -16,6 +16,6 @@ def get_content(title):
   """
   model = genai.GenerativeModel('gemini-pro')
   response = model.generate_content(prompt)
-  print(response.text)
+  print(str(response.text))
   return response.text
 
